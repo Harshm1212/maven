@@ -18,5 +18,18 @@ pipeline{
                   sh "mv target/*.war target/myweb.war"
               }
            }
+           stage("deploy-dev"){
+               steps{sshagent(['4fa91c88-8c63-4c2a-b488-bd7d9bd2bd20']) {
+                    sh """
+                         scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@10.0.1.248:/opt/tomcat10/webapps/
+                         
+                         ssh ec2-user@10.0.1.248 /opt/tomcat10/bin/shutdown.sh
+                         
+                         ssh ec2-user@10.0.1.248 /opt/tomcat10/bin/startup.sh
+
+                    """
+                    }
+               }
+           }
         }
     }
