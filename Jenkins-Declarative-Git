@@ -19,13 +19,13 @@ pipeline{
               }
            }
            /*stage("deploy-dev"){
-               steps{sshagent(['4fa91c88-8c63-4c2a-b488-bd7d9bd2bd20']) {
+               steps{sshagent(['6d4668c3-a9be-40f4-9215-ba1b494ce494']) {
                     sh """
-                         scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@10.0.1.248:/opt/tomcat10/webapps/
+                         scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@10.0.1.25:/opt/tomcat101/webapps/
                          
-                         ssh ec2-user@10.0.1.248 /opt/tomcat10/bin/shutdown.sh
+                         ssh ec2-user@10.0.1.25 /opt/tomcat101/bin/shutdown.sh
                          
-                         ssh ec2-user@10.0.1.248 /opt/tomcat10/bin/startup.sh
+                         ssh ec2-user@10.0.1.25 /opt/tomcat101/bin/startup.sh
 
                     """
                     }
